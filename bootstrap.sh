@@ -2,19 +2,20 @@
 
 # Install base tools
 sudo apt-get update
-sudo apt-get install -y git
-sudo apt-get install -y wget
-sudo apt-get install -y python-pip
-sudo apt-get install -y python-dev
+sudo apt-get install -y git wget python-pip python-dev
 
-# Download kilo stable devstack
+# Download Pike stable devstack
 git clone https://github.com/openstack-dev/devstack.git
 cd devstack
-wget https://github.com/smakam/openstack/raw/master/kilo/local.conf.control
-mv local.conf.control local.conf
+git checkout stable/pike
+wget https://hastebin.com/raw/azasabucad
+mv azasabucad local.conf
 
-# Replace Host IP
-sed -i '/HOST_IP/ c HOST_IP=192.168.59.105' local.conf
+#Do Unstacking (No need to do it if you are doing for the first time.)
+./unstack.sh
+
+#Do Clean (No need to do it if you are doing for the first time.)
+./clean.sh 
 
 # Do the stacking
 ./stack.sh
